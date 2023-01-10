@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ColorChange : MonoBehaviour
 {
-    Color GameobjectColor=new Color (R,G,B, a);
-    public Gameobject obj;
+    [SerializeField] Color GameObjectColor;
+    public GameObject obj;
 
     // Start is called before the first frame update
     void Start()
@@ -16,9 +16,9 @@ public class ColorChange : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-            if (Input.GetMouseDown(.))
+            if (Input.GetMouseButtonDown(0))
             {
-            obj.color=GameobjectColor;
+                obj.GetComponent<MeshRenderer>().material.color=GameObjectColor; 
             }
         
     }
