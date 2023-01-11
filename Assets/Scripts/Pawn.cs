@@ -4,17 +4,44 @@ using UnityEngine;
 
 public class Pawn : MonoBehaviour
 {
-    private void OnEnable()
+    [SerializeField] private AppManager _appManager;
+    private int _actualColorNumber = -1;
+    private Collider _collider;
+
+    private void Start()
     {
-        AppManager.OnMouseClic += OnClic;
+        _collider = GetComponent<Collider>();
+
     }
 
-    private void OnClic(Pawn pawn)
+    public void ActivatePawn()
     {
-        if(pawn == this)
+        _collider.enabled = true;
+    }
+    public void DesactivatePawn()
+    {
+        _collider.enabled = false;
+    }
+
+    public int GetColorNumber()
+    {
+        return _actualColorNumber;
+    }
+    public void ChangeColor()
+    {
+
+        if (_actualColorNumber == -1 || _actualColorNumber >= _appManager._answerColors.Length - 1)
         {
-            Debug.Log("find this pawn : "+gameObject.name);
+            _actualColorNumber = 0;
+        } else
+        {
+            _actualColorNumber++;
         }
-
+        GetComponent<MeshRenderer>().material.SetColor("_Color", _appManager._answerColors[_actualColorNumber]);
     }
+    public void ChangeColor(int resultColorNumber)
+    {
+        GetComponent<MeshRenderer>().material.SetColor("_Color", _appManager._resultColors[resultColorNumber]);
+    }
+
 }
