@@ -4,32 +4,16 @@ using UnityEngine;
 
 public class ColorChange : MonoBehaviour
 {
-    [SerializeField] Color GameObjectColor;
-    public GameObject obj;
- 
+    private Renderer _renderer;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+        _renderer = GetComponent<Renderer>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnMouseDown()
     {
-            if (Input.GetMouseButtonDown(0))
-            {
-                obj.GetComponent<MeshRenderer>().material.color=GameObjectColor; 
-            }
-        
-    }
-    void OnMouseOver()
-    {
-        Debug.Log("Curseur sur objet");
-    }
-
-    void OnMouseExit()
-    {
-        Debug.Log("Curseur pas sur objet");
+    _renderer.material.color =
+    _renderer.material.color == Color.red ? Color.blue : Color.red;
     }
 }
